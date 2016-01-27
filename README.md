@@ -3,7 +3,7 @@
 Ottoman is a ODM built for Couchbase and Node.js.  It is designed to remove all
 of the boilerplate neccessary to build Node.js apps with Couchbase.
 
-[![Build Status](https://api.travis-ci.org/couchbaselabs/node-ottoman.png)](https://travis-ci.org/couchbaselabs/node-ottoman)
+[![Build Status](https://travis-ci.org/mastilver/node-ottoman.svg?branch=master)](https://travis-ci.org/mastilver/node-ottoman)
 
 
 ## Useful Links

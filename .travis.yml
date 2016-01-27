@@ -1,11 +1,23 @@
+sudo: required
+
+services:
+  - docker
+
 language: node_js
+
 node_js:
   - "0.10"
   - "0.12"
-  - "4.4"
-  - "5.1"
+  - "4"
+  - "5"
+  - "6"
 
-# 0.6 is not enabled as couchnode does not support
-#   this particular version of Node.js.
-# 0.8 is not enabled as many of our imported libraries
-#   do not support it.
+before_install:
+  - docker run -d -p 8091-8093:8091-8093 -p 11210:11210 couchbase
+  - sleep 15
+  - curl -v -X POST http://127.0.0.1:8091/pools/default -d memoryQuota=300 -d indexMemoryQuota=300
+  - curl -v http://127.0.0.1:8091/settings/web -d port=8091 -d username=Administrator -d password=password
+  - curl -v -u Administrator:password -X POST http://127.0.0.1:8091/pools/default/buckets -d 'name=default' -d 'authType=sasl' -d 'bucketType=couchbase' -d 'ramQuotaMB=100' -d 'replicaNumber=2'
+
+env:
+  - CNCSTR="couchbase://localhost"
